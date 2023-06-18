@@ -25,8 +25,6 @@ class Teacher(BaseModel):
     email = models.EmailField(verbose_name="Email", max_length=250)
     address = models.CharField(verbose_name="Dirección", max_length=250, null=True, blank=True)
 
-    # RECORDAR ACTUALIZAR EL ARCHIVO DE REQUERIMIENTOS
-
     class Meta:
         verbose_name = "Profesor"
         verbose_name_plural = "Profesores"
