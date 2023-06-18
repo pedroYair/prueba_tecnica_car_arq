@@ -18,6 +18,9 @@ from django.urls import reverse_lazy
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+ROOT_DIR = os.path.abspath(os.path.join(__file__, "../../../.."))
+APPS_DIR = os.path.join(ROOT_DIR, "prueba_tecnica")
+
 environ.Env.read_env()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/

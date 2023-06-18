@@ -15,12 +15,14 @@ django-phonenumber-field==5.2.0
 django-registration-redux==2.9
 djangorestframework==3.12.4
 djangorestframework-simplejwt==4.6.0
+et-xmlfile==1.1.0
 Faker==8.1.4
 filelock==3.0.12
 idna==2.10
 kombu==4.6.11
 lxml==4.9.2
 numpy==1.24.3
+openpyxl==3.0.9
 pandas==2.0.2
 phonenumbers==8.13.13
 pipenv==2020.11.15
