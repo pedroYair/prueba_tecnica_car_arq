@@ -5,6 +5,7 @@ import openpyxl
 from typing import Any, List
 import pandas as pd
 from teachers.models import Teacher
+from students.models import Student
 from base import constants
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
@@ -40,8 +41,16 @@ def generate_excel(file_name: str, wb) -> HttpResponse:
 
 def get_copy_template(object_type: str):
     if object_type == constants.TEACHERS:
-        wb = openpyxl.load_workbook(f"{settings.APPS_DIR}/fixtures/XLSX/plantilla_profesores.xlsx")
-        return generate_excel(file_name="Formato registro masivo profesores", wb=wb)
+        wb = openpyxl.load_workbook(f"{settings.APPS_DIR}/fixtures/TEACHERS/plantilla_profesores.xlsx")
+        file_name = "Formato registro masivo profesores"
+    elif object_type == constants.STUDENTS:
+        wb = openpyxl.load_workbook(f"{settings.APPS_DIR}/fixtures/STUDENTS/plantilla_estudiantes.xlsx")
+        file_name = "Formato registro masivo estudiantes"
+    else:
+        wb = openpyxl.load_workbook(f"{settings.APPS_DIR}/fixtures/RATINGS/plantilla_calificaciones.xlsx")
+        file_name = "Formato registro masivo calificaciones"
+
+    return generate_excel(file_name=file_name, wb=wb)
 
 
 def generate_dataframe_records(file: Any, object_type: str, file_type: str) -> List[dict]:
@@ -79,13 +88,33 @@ def generate_dataframe_records(file: Any, object_type: str, file_type: str) -> L
             dataframe["document_type"] = dataframe["document_type"].str.upper()
             dataframe["gender"] = dataframe["gender"].str.upper()
 
+        elif object_type == constants.STUDENTS:
+            dataframe = dataframe.rename(
+                columns={
+                    "DOCUMENTO": "document_number",
+                    "TIPO DOCUMENTO": "document_type",
+                    "NOMBRES": "first_name",
+                    "APELLIDOS": "last_name",
+                    "FECHA NACIMIENTO": "date_of_birth",
+                    "GENERO": "gender",
+                    "TELEFONO": "phone",
+                }
+            )
+            dataframe["date_of_birth"] = pd.to_datetime(
+                dataframe["date_of_birth"], errors="coerce"
+            )
+            dataframe["document_type"] = dataframe["document_type"].str.upper()
+            dataframe["gender"] = dataframe["gender"].str.upper()
+
         return dataframe.to_dict(orient="records")
 
 
 def save_records(records: List[dict], object_type: str) -> dict:
     success_amount = 0
     errors_amount = 0
+    object_name = ""
     if object_type == constants.TEACHERS:
+        object_name = "Profesor(es)"
         for item in records:
             if str(item["phone"])[0:3] != '+57':
                 phone = '+57' + str(item["phone"])
@@ -115,5 +144,28 @@ def save_records(records: List[dict], object_type: str) -> dict:
                 errors_amount += 1
                 continue
 
-    return {"success_amount": success_amount,
-            "errors_amount": errors_amount}
+    elif object_type == constants.STUDENTS:
+        object_name = "Estudiante(s)"
+        for item in records:
+            if str(item["phone"])[0:3] != '+57':
+                phone = '+57' + str(item["phone"])
+            else:
+                phone = item["phone"]
+
+            try:
+                Student.objects.create(
+                    document_number=item["document_number"],
+                    document_type=item["document_type"],
+                    first_name=item["first_name"],
+                    last_name=item["last_name"],
+                    date_of_birth=item["date_of_birth"],
+                    gender=item["gender"],
+                    phone=phone
+                )
+                success_amount += 1
+            except Exception as e:
+                print(str(e))
+                errors_amount += 1
+                continue
+
+    return {"object_name": object_name, "success_amount": success_amount, "errors_amount": errors_amount}
