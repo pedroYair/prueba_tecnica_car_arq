@@ -9,6 +9,6 @@ def send_email_task(subject: str, body: str):
 
 
 @celery_app.task
-def import_massive_data(file: Any, object_type: str):
-    records = generate_dataframe_records(file=file, object_type=object_type)
+def import_massive_data(file: Any, object_type: str, file_type: str):
+    records = generate_dataframe_records(file=file, object_type=object_type, file_type=file_type)
     return save_records(records=records, object_type=object_type)
