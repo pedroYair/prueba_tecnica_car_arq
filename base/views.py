@@ -24,16 +24,11 @@ def import_massive_data(request):
 
                 success_amount = result["success_amount"]
                 errors_amount = result["errors_amount"]
-                success_message = ""
-                error_message = ""
-                subject = ""
-                body = ""
-
-                if object_type == constants.TEACHERS:
-                    success_message = f"{ success_amount} profesor(es) importados exitosamente"
-                    error_message = f"{errors_amount} profesor(es) no pudieron ser importados"
-                    subject = "Importaciòn masiva de profesores"
-                    body = f"<strong>Profesor(es) importados: {success_amount}<br>Profesor(es) no importados: {errors_amount}</strong>"
+                object_name = result["object_name"]
+                success_message = f"{ success_amount} {object_name} importado(s) exitosamente"
+                error_message = f"{errors_amount} {object_name} no pudieron ser importado(s)"
+                subject = f"Importaciòn masiva de {object_name}"
+                body = f"<strong>{object_name} importado(s): {success_amount}<br>{object_name} no importado(s): {errors_amount}</strong>"
 
                 if success_amount > 0:
                     messages.success(request, success_message)

@@ -19,7 +19,7 @@ from django.urls import reverse_lazy
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 ROOT_DIR = os.path.abspath(os.path.join(__file__, "../../../.."))
-APPS_DIR = os.path.join(ROOT_DIR, "prueba_tecnica")
+APPS_DIR = os.path.join(ROOT_DIR, "prueba_tecnica_car_arq")
 
 environ.Env.read_env()
 # Quick-start development settings - unsuitable for production
