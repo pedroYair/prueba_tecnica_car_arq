@@ -21,8 +21,8 @@ class Teacher(BaseModel):
     last_name = models.CharField(max_length=50, verbose_name="Apellidos")
     date_of_birth = models.DateField("Fecha de nacimiento", null=True, blank=True)
     gender = models.CharField(verbose_name="Género", max_length=10, choices=GenderType.choices)
-    phone = PhoneNumberField(verbose_name="Teléfono")
-    email = models.EmailField(verbose_name="Email", max_length=250)
+    phone = PhoneNumberField(verbose_name="Teléfono", unique=True)
+    email = models.EmailField(verbose_name="Email", max_length=250, unique=True)
     address = models.CharField(verbose_name="Dirección", max_length=250, null=True, blank=True)
 
     class Meta:

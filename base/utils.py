@@ -6,6 +6,8 @@ from typing import Any, List
 import pandas as pd
 from teachers.models import Teacher
 from base import constants
+from dateutil.relativedelta import relativedelta
+from datetime import datetime
 
 
 class UnableToProcessRecordFile(Exception):
@@ -42,11 +44,19 @@ def get_copy_template(object_type: str):
         return generate_excel(file_name="Formato registro masivo profesores", wb=wb)
 
 
-def generate_dataframe_records(file: Any, object_type: str) -> List[dict]:
+def generate_dataframe_records(file: Any, object_type: str, file_type: str) -> List[dict]:
     try:
-        io_record = pd.ExcelFile(path_or_buffer=file)
-        dataframe = pd.read_excel(io=io_record, engine="openpyxl")
-    except Exception:
+        if file_type in [constants.XLS, constants.XLSX]:
+            io_record = pd.ExcelFile(path_or_buffer=file)
+            if file_type == constants.XLSX:
+                dataframe = pd.read_excel(io=io_record, engine="openpyxl")
+            else:
+                dataframe = pd.read_excel(io=io_record)  # for xls files
+        else:
+            dataframe = pd.read_csv(filepath_or_buffer=file, engine='c')
+
+    except Exception as e:
+        print(str(e))
         raise UnableToProcessRecordFile()
     else:
         if object_type == constants.TEACHERS:
@@ -82,6 +92,11 @@ def save_records(records: List[dict], object_type: str) -> dict:
             else:
                 phone = item["phone"]
 
+            # validating age
+            if relativedelta(datetime.now(), item["date_of_birth"]).years < 18:
+                errors_amount += 1
+                continue
+
             try:
                 Teacher.objects.create(
                     document_number=item["document_number"],
@@ -96,7 +111,7 @@ def save_records(records: List[dict], object_type: str) -> dict:
                 )
                 success_amount += 1
             except Exception as e:
-                print(str(e), "++++++++++++++")
+                print(str(e))
                 errors_amount += 1
                 continue
 

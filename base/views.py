@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -16,7 +18,9 @@ def import_massive_data(request):
 
             if type_action == constants.LOAD:
                 file = form.cleaned_data["file"]
-                result = task.import_massive_data(file=file, object_type=object_type)
+                file_type = os.path.splitext(file.name)[1]
+                file_type = file_type.upper()[1:]
+                result = task.import_massive_data(file=file, object_type=object_type, file_type=file_type)
 
                 success_amount = result["success_amount"]
                 errors_amount = result["errors_amount"]
@@ -26,10 +30,10 @@ def import_massive_data(request):
                 body = ""
 
                 if object_type == constants.TEACHERS:
-                    success_message = f"{ success_amount} profesores importados exitosamente"
-                    error_message = f"{errors_amount} profesores no pudieron ser importados"
+                    success_message = f"{ success_amount} profesor(es) importados exitosamente"
+                    error_message = f"{errors_amount} profesor(es) no pudieron ser importados"
                     subject = "Importaciòn masiva de profesores"
-                    body = f"<strong>Profesores importados: {success_amount}<br>Profesores no importados: {errors_amount}</strong>"
+                    body = f"<strong>Profesor(es) importados: {success_amount}<br>Profesor(es) no importados: {errors_amount}</strong>"
 
                 if success_amount > 0:
                     messages.success(request, success_message)
