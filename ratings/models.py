@@ -5,6 +5,7 @@ from students.models import Student
 from teachers.models import Teacher
 from subjects.models import Subject
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models import CheckConstraint, Q
 
 
 class Rating(BaseModel):
@@ -36,9 +37,7 @@ class Rating(BaseModel):
     )
     rating_number = models.FloatField(
         verbose_name="Calificación numérica",
-        validators=[MinValueValidator(0.0), MaxValueValidator(10.0)],
-        null=True,
-        blank=True,
+        validators=[MinValueValidator(0.0), MaxValueValidator(10.0)]
     )
     observations = models.TextField(verbose_name="Observaciones", null=True, blank=True)
 
@@ -48,3 +47,9 @@ class Rating(BaseModel):
     class Meta:
         verbose_name = "Calificación"
         verbose_name_plural = "Calificaciones"
+        constraints = (
+            # for checking in the DB
+            CheckConstraint(
+                check=Q(rating_number__gte=0.0) & Q(rating_number__lte=10.0),
+                name='rating_number_range'),
+        )

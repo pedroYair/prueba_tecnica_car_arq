@@ -22,30 +22,33 @@ def import_massive_data(request):
                 file_type = file_type.upper()[1:]
                 result = task.import_massive_data(file=file, object_type=object_type, file_type=file_type)
 
-                success_amount = result["success_amount"]
-                errors_amount = result["errors_amount"]
-                object_name = result["object_name"]
-                success_message = f"{ success_amount} {object_name} importado(s) exitosamente"
-                error_message = f"{errors_amount} {object_name} no pudieron ser importado(s)"
-                subject = f"Importaciòn masiva de {object_name}"
-                body = f"<strong>{object_name} importado(s): {success_amount}<br>{object_name} no importado(s): {errors_amount}</strong>"
+                if result:
+                    success_amount = result["success_amount"]
+                    errors_amount = result["errors_amount"]
+                    object_name = result["object_name"]
+                    success_message = f"{ success_amount} {object_name} importado(s) exitosamente"
+                    error_message = f"{errors_amount} {object_name} no pudieron ser importado(s)"
+                    subject = f"Importaciòn masiva de {object_name}"
+                    body = f"<strong>{object_name} importado(s): {success_amount}<br>{object_name} no importado(s): {errors_amount}</strong>"
 
-                if success_amount > 0:
-                    messages.success(request, success_message)
+                    if success_amount > 0:
+                        messages.success(request, success_message)
 
-                if errors_amount > 0:
-                    messages.error(request, error_message)
+                    if errors_amount > 0:
+                        messages.error(request, error_message)
+                    else:
+                        messages.info(request, error_message)
+
+                    send_email_response = task.send_email(subject=subject, body=body)
+
+                    if send_email_response:
+                        messages.success(request, "Email enviado!!")
+                    else:
+                        messages.error(request, "El email no pudo ser enviado!!")
                 else:
-                    messages.info(request, error_message)
+                    messages.error(request, "El archivo no pudo ser procesado. Por favor verifiquelo.")
 
-                send_email_response = task.send_email(subject=subject, body=body)
-
-                if send_email_response:
-                    messages.success(request, "Email enviado!!")
-                else:
-                    messages.error(request, "El email no pudo ser enviado!!")
-
-                return redirect("base:import_massive_data")
+                    return redirect("base:import_massive_data")
             else:
                 return utils.get_copy_template(object_type=object_type)
     else:
