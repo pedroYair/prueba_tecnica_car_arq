@@ -37,6 +37,7 @@ http://127.0.0.1:8000/base/massive_import (dentro de la carpeta fixtures se adju
 ![img.png](static/img/import_massive.png)
 
 ![img.png](static/img/import_massive_email.png)
+
 4. RestApi: las urls de los microservicios creados pueden ser visualizadas en el archivo url
 ubicado dentro de la carpeta api de las diferentes apps. Para los 4 modelos creados (Teacher, Student, Subject y Rating) 
 se crearon las 4 actions (GET, POST, DELETE, PATCH) es decir creacion, edicion, borrar y listar,
