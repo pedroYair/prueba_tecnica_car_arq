@@ -25,6 +25,7 @@ urlpatterns = [
     path('subjects/', include('subjects.urls', namespace="subjects")),
     path('teacher_api/', include('teachers.api.urls', namespace="teacher_api")),
     path('student_api/', include('students.api.urls', namespace="student_api")),
+    path('subject_api/', include('subjects.api.urls', namespace="subject_api")),
     path('', RedirectView.as_view(url='/home/')),
     path('accounts/', include('registration.backends.default.urls'))
 ]

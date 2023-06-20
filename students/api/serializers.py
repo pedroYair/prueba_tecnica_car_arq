@@ -43,3 +43,14 @@ class StudentSerializer(serializers.ModelSerializer):
             student.phone = validated_data.get("phone", student.phone)
             student.save()
             return student
+
+
+class StudentSummarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ['id',
+                  'document_number',
+                  'first_name',
+                  'last_name',
+                  'gender',
+                  ]
