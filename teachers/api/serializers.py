@@ -48,3 +48,12 @@ class TeacherSerializer(serializers.ModelSerializer):
             teacher.save()
             return teacher
 
+
+class TeacherSummarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Teacher
+        fields = ['id',
+                  'document_number',
+                  'first_name',
+                  'last_name',
+                  ]
