@@ -2,7 +2,6 @@ from rest_framework import serializers
 from subjects.models import Subject
 from teachers.api.serializers import TeacherSummarySerializer
 from students.api.serializers import StudentSummarySerializer
-from django.db.transaction import atomic
 
 
 class SubjectSerializer(serializers.ModelSerializer):
@@ -28,4 +27,14 @@ class SubjectCreateSerializer(serializers.ModelSerializer):
                   'name',
                   'teacher',
                   'students',
+                  ]
+
+
+class SubjectSummarySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Subject
+        fields = ['id',
+                  'code',
+                  'name',
                   ]
