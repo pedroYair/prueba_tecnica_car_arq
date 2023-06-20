@@ -1,0 +1,598 @@
+{
+	"info": {
+		"_postman_id": "bdefd54a-24f8-4b59-9853-4fc0372a4934",
+		"name": "prueba_car_arquitectura",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19694728"
+	},
+	"item": [
+		{
+			"name": "base",
+			"item": [
+				{
+					"name": "get_access_token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"admin\",\n\"password\": \"admin\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}base_api/v1/token/",
+							"host": [
+								"{{local_url}}base_api"
+							],
+							"path": [
+								"v1",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-token-refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY4NzIxMjE2OCwianRpIjoiMTczNzcyMDNjMzIzNDhjNjkyZGVhMGU0NTZmYjg1NjkiLCJ1c2VyX2lkIjoxfQ.oNtIilW5pvG9LP4Aob8Ho3dMbPfD4UNgOKU2w4UmRz8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}base_api/v1/token_refresh/",
+							"host": [
+								"{{local_url}}base_api"
+							],
+							"path": [
+								"v1",
+								"token_refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "teachers",
+			"item": [
+				{
+					"name": "teachers_list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjEyMTY4LCJqdGkiOiI5MzhmNjk2ZWQwNDU0NmMzOTllNGIxYWIyZjNjMzU2ZSIsInVzZXJfaWQiOjF9.tcVK5zVYVtcpXHr_OJoFAkJLtPnk_12TMnr21HPGo98",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local_url}}teacher_api/v1/teachers_list/",
+							"host": [
+								"{{local_url}}teacher_api"
+							],
+							"path": [
+								"v1",
+								"teachers_list",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teachers_delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjE2MTI2LCJqdGkiOiJlNWJjMzA3ZDI4NDQ0ODU4YTRhMWY2NTE3OTFmYmQ4ZiIsInVzZXJfaWQiOjF9.S-N_iOKTJK45bnoPO_6z8cosIgHkl3BHwOGxuFMVZS0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local_url}}teacher_api/v1/teachers_delete/148/",
+							"host": [
+								"{{local_url}}teacher_api"
+							],
+							"path": [
+								"v1",
+								"teachers_delete",
+								"148",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teachers_create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjEyMTY4LCJqdGkiOiI5MzhmNjk2ZWQwNDU0NmMzOTllNGIxYWIyZjNjMzU2ZSIsInVzZXJfaWQiOjF9.tcVK5zVYVtcpXHr_OJoFAkJLtPnk_12TMnr21HPGo98",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"document_number\": \"123456789\",\n    \"document_type\": \"CC\",\n    \"first_name\": \"Plinio Puello Marrugo\",\n    \"last_name\": \"Puello Marrugo\",\n    \"date_of_birth\": \"1965-10-31\",\n    \"gender\": \"M\",\n    \"phone\": \"3205108330\",\n    \"email\": \"plinio@gmail.com\",\n    \"address\": \"Cartagena Barrio Piedra de Bolivar\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}teacher_api/v1/teachers_create/",
+							"host": [
+								"{{local_url}}teacher_api"
+							],
+							"path": [
+								"v1",
+								"teachers_create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teachers_update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjI2ODY5LCJqdGkiOiIzYWQ0ZTE3OGY4ZWI0MGQ3OWJiMzdjYTQyNjFjNzg1OSIsInVzZXJfaWQiOjF9.2n2st_RPigjRvCMhe0wMjLm38mYkEcriKym4JLVQsJY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"document_number\": \"123456780\",\n    \"document_type\": \"CC\",\n    \"first_name\": \"Plinio Puello Marrugo\",\n    \"last_name\": \"Puello Marrugo\",\n    \"date_of_birth\": \"1965-10-31\",\n    \"gender\": \"M\",\n    \"phone\": \"3205108500\",\n    \"email\": \"plinio2@gmail.com\",\n    \"address\": \"Cartagena Barrio España\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}teacher_api/v1/teachers_update/139/",
+							"host": [
+								"{{local_url}}teacher_api"
+							],
+							"path": [
+								"v1",
+								"teachers_update",
+								"139",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "students",
+			"item": [
+				{
+					"name": "students_list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjE2OTMyLCJqdGkiOiI2MDI0MmU4ZTE3MDM0NGIyYjk2MGNjNGUyZTcwMWUwMyIsInVzZXJfaWQiOjF9.iRPh7ZJ6j_qiVzOyy8f8Q44XkGSJO-DvotrWHf7ZH-k",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local_url}}student_api/v1/students_list/",
+							"host": [
+								"{{local_url}}student_api"
+							],
+							"path": [
+								"v1",
+								"students_list",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "students_delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjI3MTI3LCJqdGkiOiJiMWMzNjVlYzczMjA0OTI3YjUzNzFjYWFmMTkyOWEzYiIsInVzZXJfaWQiOjF9.7VL-WnYwDQy7DYzAyhdcWhYgQN_qFUfAhwL4uo36ZWc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local_url}}student_api/v1/students_delete/23/",
+							"host": [
+								"{{local_url}}student_api"
+							],
+							"path": [
+								"v1",
+								"students_delete",
+								"23",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "students_create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjI1NTI2LCJqdGkiOiI4MTZlODI2N2VmMTY0NGM0OTNiYzE1YTc4YWNkZTk5MSIsInVzZXJfaWQiOjF9.eiMs-0ioKdLW8U1HgG5Qr1RCPFBxzbpwk8yzdTICvag",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"document_number\": \"123456789\",\n    \"document_type\": \"CC\",\n    \"first_name\": \"Luis Andres\",\n    \"last_name\": \"Perez Florez\",\n    \"date_of_birth\": \"2000-10-31\",\n    \"gender\": \"M\",\n    \"phone\": \"3205108330\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}student_api/v1/students_create/",
+							"host": [
+								"{{local_url}}student_api"
+							],
+							"path": [
+								"v1",
+								"students_create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "students_update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjI2NjEzLCJqdGkiOiI1MDVlMDBmZThlY2U0NmQyYjZmYzVhOTdlYjdiYWIxZSIsInVzZXJfaWQiOjF9.PpBCbQo4mg6_ZupnKWYu_mPjdp4l08ATr68cjK_XSZw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"document_number\": \"123456780\",\n    \"document_type\": \"TI\",\n    \"first_name\": \"Luis Antonio\",\n    \"last_name\": \"Puello Marrugo\",\n    \"date_of_birth\": \"2000-10-31\",\n    \"gender\": \"M\",\n    \"phone\": \"3205108331\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}student_api/v1/students_update/23/",
+							"host": [
+								"{{local_url}}student_api"
+							],
+							"path": [
+								"v1",
+								"students_update",
+								"23",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subjects",
+			"item": [
+				{
+					"name": "subjetcts_list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjI4MTA0LCJqdGkiOiI0YzNkNzJhZDJhNTI0NGE1ODhlYzZjYWRjZTdkZTczNyIsInVzZXJfaWQiOjF9.Z55edtBzh5AWCoUkixko5dy61i022FBqV6UvPo4mTNM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local_url}}subject_api/v1/subjects_list/",
+							"host": [
+								"{{local_url}}subject_api"
+							],
+							"path": [
+								"v1",
+								"subjects_list",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subjects_delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjI5NjUwLCJqdGkiOiIzZDZiNWY1ZmNkNDQ0ZWViYjQ4ODczOGE1MzVmYTA5NSIsInVzZXJfaWQiOjF9.w5ERbnz62_a6tLQcFkmFwvcfFD_saRL1q3pKbQFKKeY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local_url}}subject_api/v1/subjects_delete/146/",
+							"host": [
+								"{{local_url}}subject_api"
+							],
+							"path": [
+								"v1",
+								"subjects_delete",
+								"146",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subjects_create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjI4ODk5LCJqdGkiOiJmNThmMDEwY2JiNGQ0NTA5YjA4MGM2ZTIyYjdkY2IxYiIsInVzZXJfaWQiOjF9.Ep56qhCBRd4vhRUGl0c774f-D_EIv-fzto_PWoR4_u0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"123456780\",\n    \"name\": \"Calculo integral\",\n    \"teacher\": 139,\n    \"students\": [1, 2, 3, 4, 5]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}subject_api/v1/subjects_create/",
+							"host": [
+								"{{local_url}}subject_api"
+							],
+							"path": [
+								"v1",
+								"subjects_create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subjects_update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjI4ODk5LCJqdGkiOiJmNThmMDEwY2JiNGQ0NTA5YjA4MGM2ZTIyYjdkY2IxYiIsInVzZXJfaWQiOjF9.Ep56qhCBRd4vhRUGl0c774f-D_EIv-fzto_PWoR4_u0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"123456780\",\n    \"name\": \"Calculo integral\",\n    \"teacher\": 137,\n    \"students\": [1, 2, 3]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}subject_api/v1/subjects_update/146/",
+							"host": [
+								"{{local_url}}subject_api"
+							],
+							"path": [
+								"v1",
+								"subjects_update",
+								"146",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ratings",
+			"item": [
+				{
+					"name": "ratings_list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjMxNzM1LCJqdGkiOiI1NzJkNDVjMmY0YjI0Y2NmYjU2YjU4NDEyNjE0OGEzZCIsInVzZXJfaWQiOjF9.CpScdAgVaUP0_K60pKZSS9THwyHYqZva23r6lnsWMjo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local_url}}rating_api/v1/ratings_list/",
+							"host": [
+								"{{local_url}}rating_api"
+							],
+							"path": [
+								"v1",
+								"ratings_list",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ratings_delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjMzNDQzLCJqdGkiOiIxOTE4ZGFlMjQzOWU0ZmNiYmMzYzdmMDM5MjY2OWJhMCIsInVzZXJfaWQiOjF9.rG9dd-fZ0mJrxu9VTpLTONVx1B3R2jkDc-INhzsRRSg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local_url}}rating_api/v1/ratings_delete/35/",
+							"host": [
+								"{{local_url}}rating_api"
+							],
+							"path": [
+								"v1",
+								"ratings_delete",
+								"35",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ratings_create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjMyMDgzLCJqdGkiOiJiYjAwNWJjOTYyODQ0YTRmYjM5Y2Q2ZTczN2VmZDk5ZiIsInVzZXJfaWQiOjF9.sGDFtHxJ64xXeAau2H2Pa1sJ2Hl4oQIoV3vgD7UD4-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"activity\": \"LECTURA\",\n        \"student\": 2,\n        \"teacher\": 103,\n        \"subject\": 73,\n        \"rating_number\": 5.5,\n        \"observations\": \"NOTA PARA EL ESTUDIANTE\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}rating_api/v1/ratings_create/",
+							"host": [
+								"{{local_url}}rating_api"
+							],
+							"path": [
+								"v1",
+								"ratings_create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ratings_update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MjMzMTYyLCJqdGkiOiI4ZDQ2ZjU1YjE4ZjM0MDY0OTNlYzc3ZTVlMWViYzJkNyIsInVzZXJfaWQiOjF9.-bF2G6SDQfqBLHA8hF8cnqtJtc9yZZ-x9MiLbExdFnc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"activity\": \"EXPOSICION\",\n        \"student\": 1,\n        \"teacher\": 103,\n        \"subject\": 73,\n        \"rating_number\": 10,\n        \"observations\": \"NOTA PARA EL ESTUDIANTE\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}rating_api/v1/ratings_update/35/",
+							"host": [
+								"{{local_url}}rating_api"
+							],
+							"path": [
+								"v1",
+								"ratings_update",
+								"35",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local_url",
+			"value": "http://127.0.0.1:8000/",
+			"type": "string"
+		}
+	]
+}
