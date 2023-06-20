@@ -4,10 +4,10 @@ Plataforma web que permite gestionar los datos de estudiantes, profesores y curs
 
 # Instalación
 
-1. Clonar el repositorio (AGREGAR URL DEL REPO AQUI)
+1. Clonar el repositorio https://github.com/pedroYair/prueba_tecnica_car_arq.git
 2. Configurar archivo .env empleando la plantilla ubicada en config/settings/.env_example
-3. Instalar requerimientos
-3. Ejecutar empleado:
+3. Instalar requerimientos ubicados en el archivo requirements.txt
+3. Ejecutar empleando:
    
    ```python 
    python manage.py runserver
