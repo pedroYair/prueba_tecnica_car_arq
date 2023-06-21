@@ -12,6 +12,7 @@ Plataforma web que permite gestionar los datos de estudiantes, profesores y curs
    ```python 
    python manage.py runserver
    ```
+Nota: Se requiere una base de datos postgres; para el envio de emails se usò una cuenta hotmail.
 
 # Accesos
 
